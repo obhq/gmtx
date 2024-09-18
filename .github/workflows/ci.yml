@@ -1,0 +1,24 @@
+name: CI
+on:
+  pull_request:
+    branches:
+    - main
+  push:
+    branches:
+    - main
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        os: [macos-12, macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Check Rust styles
+      run: cargo fmt --check
+    - name: Lint
+      run: cargo clippy -- -D warnings
+    - name: Run tests
+      run: cargo test --workspace
