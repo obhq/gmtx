@@ -1,13 +1,16 @@
 [package]
 name = "gmtx"
+description = "Mutex that grant exclusive access to a group of members"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/obhq/gmtx"
+license = "MIT OR Apache-2.0"
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
 
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.52", features = ["Win32_System_Threading"] }
+windows-sys = { version = "0.59.0", features = ["Win32", "Win32_System", "Win32_System_Threading"] }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 ulock-sys = "0.1.0"
